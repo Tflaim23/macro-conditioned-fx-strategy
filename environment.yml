@@ -1,0 +1,7 @@
+name: fxmacro
+channels:
+  - conda-forge
+dependencies:
+  - python=3.11
+  - pyyaml
+prefix: /home/tflaim/miniforge3/envs/fxmacro

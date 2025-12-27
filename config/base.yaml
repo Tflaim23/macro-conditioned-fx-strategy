@@ -1,0 +1,51 @@
+project:
+  name: "Macro-Conditioned FX Strategy"
+  run_tag: "dev"
+  seed: 42
+
+paths:
+  db_path: "data/fxmacro.sqlite"
+  outputs_dir: "outputs/runs"
+
+universe:
+  instruments:
+    - "EURUSD"
+    - "USDJPY"
+    - "GBPUSD"
+    - "AUDUSD"
+    - "USDCAD"
+    - "USDCHF"
+    - "NZDUSD"
+    - "EURJPY"
+    - "AUDJPY"
+
+returns:
+  primary: "fwd_excess_1m"
+  secondary: "spot_1m"
+
+timing:
+  decision_frequency: "monthly"
+  decision_day_rule: "month_end"
+  default_release_lag_days: 7
+
+costs:
+  scenario: "realistic"
+  scenarios:
+    optimistic:
+      half_spread_bps: 0.5
+      slippage_bps: 0.5
+    realistic:
+      half_spread_bps: 1.0
+      slippage_bps: 1.0
+    pessimistic:
+      half_spread_bps: 2.0
+      slippage_bps: 2.0
+
+portfolio:
+  vol_target_annual: 0.10
+  position_cap: 0.25
+  usd_neutral_constraint: false
+
+validation:
+  no_premature_availability: true
+  missingness_no_pre_availability_forward_fill: true
